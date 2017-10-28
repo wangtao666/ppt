@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>前端发展史</title>
+		<!--页头标签-->
+		<link rel="SHORTCUT ICON" href="11.ico">
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css"/>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+			.content{
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				position: relative;
+				background-image: url(5.jpg);
+				background-repeat: round;
+				display: none;
+			}
+			.pages{
+				height: 100%;
+				list-style: none;
+				position: absolute;
+				left: 0;
+				top: 0;
+				/*贝塞尔曲线只需要加在元素上，js动画时会自动运行*/
+				transition-timing-function: cubic-bezier(0.14, 0.25, 0, 1.18);
+   				transition-duration: 0.3s;
+			}
+			.pages>li{
+				height: 100%;
+				float: left;
+			}
+			.btn_left{
+				position: fixed;
+			    left: 0;
+			    top: 50%;
+			    width: 50px;
+			    height: 50px;
+			    line-height: 50px;
+			    text-align: center;
+			    font-size: 32px;
+			    cursor: pointer;
+			    color: #fff;
+			    background: #06200b;
+			    opacity: .5;
+			}
+			.btn_left:hover,.btn_right:hover{
+				opacity: 1;
+			}
+			.btn_right{
+				position: fixed;
+			    right: 0;
+			    top: 50%;
+			    width: 50px;
+			    height: 50px;
+			    line-height: 50px;
+			    text-align: center;
+			    font-size: 32px;
+			    cursor: pointer;
+			    color: #fff;
+			    background: #06200b;
+			    opacity: .5;
+			}
+			.el_font{
+				width: 100%;
+				height: 100%;
+				color: #fff;
+				font-size: 24px;
+				position: relative;
+			}
+			.el_img{
+				height: 100%;
+				background: green;
+				text-align: center;
+				min-width: 80%;
+			    margin: 0 auto;
+			    display: block;
+		        opacity: .5;
+			}
+			.els_font{
+				position: absolute;
+				left: 170px;
+				top: 200px;
+				width: 1000px;
+				word-break: break-word;
+				text-align: left;
+				text-indent: 32px;
+				display: none;
+				text-shadow: 4px 2px 5px black;
+			}
+			.els_title{
+				position: absolute;
+			    left: -200px;
+				top: 100px;
+				width: 1000px;
+				text-align: center;
+				font-weight: bold;
+				color: #3bfd11;
+				font-size: 38px;
+				display: none;
+			    text-shadow: 3px 4px 12px black;
+			}
+			
+			
+			.b_10_3 {
+				overflow: hidden;
+			    text-align: center;
+			    background: rgba(253, 253, 253, 0.76);
+			    position: absolute;
+			    z-index: 99999999;
+			    left: 100px;
+			    top: 35px;
+			    border-radius: 150px;
+			    box-shadow: 3px 1px 12px rgb(231, 160, 87);
+			    display: none;
+			 }
+			.b_10_3 span {
+				float: left; font-size:16px; line-height:2em;
+			}
+			.b_10_3 span.bold {
+				font-weight:bold;
+			}
+			.b_10_3 span:nth-child(1) {
+				width: 35%;
+				text-align: center;
+			}
+			.b_10_3 span:nth-child(2) {
+				width: 30%;
+				text-align: left;
+			}
+			.b_10_3 span:nth-child(3) {
+				width: 35%;
+				text-align: left;
+			}
+			.b_10_3 span:nth-child(4) {
+				width: 35%;
+				text-align: right;
+			}
+			.b_10_3 span:nth-child(5) {
+				width: 25%;
+				text-align: right;
+			}
+			.b_10_3 span:nth-child(6) {
+				width: 25%;
+				text-align: right;
+			}
+			.b_10_3 span:nth-child(7) {
+				width: 50%;
+				text-align: center;
+			}
+			.b_10_3 span:nth-child(8) {
+				width: 30%;
+				text-align: center;
+			}
+			.b_10_3 span:nth-child(9) {
+				width: 50%;
+				text-align: right;
+			}
+			.b_10_3 span:nth-child(10) {
+				width: 40%;
+				text-align: right;
+			}
+			
+			
+			 .particletext {
+			  font-family: 'bebas', sans-serif;
+			  position: relative;
+			}
+			 .particletext.bubbles > .particle {
+			  opacity: 0;
+			  position: absolute;
+			  background-color: rgba(33, 150, 243, 0.5);
+			  -webkit-animation: bubbles 3s ease-in infinite;
+			          animation: bubbles 3s ease-in infinite;
+			  border-radius: 100%;
+			}
+			 .particletext.hearts > .particle {
+			  opacity: 0;
+			  position: absolute;
+			  background-color: #cc2a5d;
+			  -webkit-animation: hearts 3s ease-in infinite;
+			          animation: hearts 3s ease-in infinite;
+			}
+			 .particletext.hearts > .particle:before, body .particletext.hearts > .particle:after {
+			  position: absolute;
+			  content: '';
+			  border-radius: 100px;
+			  top: 0px;
+			  left: 0px;
+			  width: 100%;
+			  height: 100%;
+			  background-color: #cc2a5d;
+			}
+			 .particletext.hearts > .particle:before {
+			  -webkit-transform: translateX(-50%);
+			          transform: translateX(-50%);
+			}
+			 .particletext.hearts > .particle:after {
+			  -webkit-transform: translateY(-50%);
+			          transform: translateY(-50%);
+			}
+			 .particletext.lines > .particle {
+			  position: absolute;
+			  background-color: rgba(244, 67, 54, 0.5);
+			  -webkit-animation: lines 3s linear infinite;
+			          animation: lines 3s linear infinite;
+			}
+			 .particletext.confetti > .particle {
+			  opacity: 0;
+			  position: absolute;
+			  -webkit-animation: confetti 3s ease-in infinite;
+			          animation: confetti 3s ease-in infinite;
+			}
+			 .particletext.confetti > .particle.c1 {
+			  background-color: rgba(76, 175, 80, 0.5);
+			}
+			 .particletext.confetti > .particle.c2 {
+			  background-color: rgba(156, 39, 176, 0.5);
+			}
+			 .particletext.fire > .particle {
+			  position: absolute;
+			  background-color: rgba(255, 193, 7, 0.5);
+			  border-radius: 40px;
+			  border-top-right-radius: 0px;
+			  -webkit-animation: fires 0.8s linear infinite;
+			          animation: fires 0.8s linear infinite;
+			  -webkit-transform: rotate(-45deg);
+			          transform: rotate(-45deg);
+			  opacity: 0;
+			}
+			 .particletext.fire > .particle:before {
+			  position: absolute;
+			  content: '';
+			  top: 60%;
+			  left: 40%;
+			  -webkit-transform: translate(-50%, -50%);
+			          transform: translate(-50%, -50%);
+			  width: 50%;
+			  height: 50%;
+			  border-radius: 40px;
+			  border-top-right-radius: 0px;
+			  background-color: rgba(251, 140, 0, 0.5);
+			}
+			 .particletext.sunbeams > .particle {
+			  position: absolute;
+			  background-color: rgba(253, 216, 53, 0.5);
+			  -webkit-animation: sunbeams 3s linear infinite;
+			          animation: sunbeams 3s linear infinite;
+			}
+			@-webkit-keyframes bubbles {
+			  0% {
+			    opacity: 0;
+			  }
+			  20% {
+			    opacity: 1;
+			    -webkit-transform: translate(0, -20%);
+			            transform: translate(0, -20%);
+			  }
+			  100% {
+			    opacity: 0;
+			    -webkit-transform: translate(0, -1000%);
+			            transform: translate(0, -1000%);
+			  }
+			}
+			
+			@keyframes bubbles {
+			  0% {
+			    opacity: 0;
+			  }
+			  20% {
+			    opacity: 1;
+			    -webkit-transform: translate(0, -20%);
+			            transform: translate(0, -20%);
+			  }
+			  100% {
+			    opacity: 0;
+			    -webkit-transform: translate(0, -1000%);
+			            transform: translate(0, -1000%);
+			  }
+			}
+			@-webkit-keyframes hearts {
+			  0% {
+			    opacity: 0;
+			    -webkit-transform: translate(0, 0%) rotate(45deg);
+			            transform: translate(0, 0%) rotate(45deg);
+			  }
+			  20% {
+			    opacity: 0.8;
+			    -webkit-transform: translate(0, -20%) rotate(45deg);
+			            transform: translate(0, -20%) rotate(45deg);
+			  }
+			  100% {
+			    opacity: 0;
+			    -webkit-transform: translate(0, -1000%) rotate(45deg);
+			            transform: translate(0, -1000%) rotate(45deg);
+			  }
+			}
+			@keyframes hearts {
+			  0% {
+			    opacity: 0;
+			    -webkit-transform: translate(0, 0%) rotate(45deg);
+			            transform: translate(0, 0%) rotate(45deg);
+			  }
+			  20% {
+			    opacity: 0.8;
+			    -webkit-transform: translate(0, -20%) rotate(45deg);
+			            transform: translate(0, -20%) rotate(45deg);
+			  }
+			  100% {
+			    opacity: 0;
+			    -webkit-transform: translate(0, -1000%) rotate(45deg);
+			            transform: translate(0, -1000%) rotate(45deg);
+			  }
+			}
+			@-webkit-keyframes lines {
+			  0%, 50%, 100% {
+			    -webkit-transform: translateY(0%);
+			            transform: translateY(0%);
+			  }
+			  25% {
+			    -webkit-transform: translateY(100%);
+			            transform: translateY(100%);
+			  }
+			  75% {
+			    -webkit-transform: translateY(-100%);
+			            transform: translateY(-100%);
+			  }
+			}
+			@keyframes lines {
+			  0%, 50%, 100% {
+			    -webkit-transform: translateY(0%);
+			            transform: translateY(0%);
+			  }
+			  25% {
+			    -webkit-transform: translateY(100%);
+			            transform: translateY(100%);
+			  }
+			  75% {
+			    -webkit-transform: translateY(-100%);
+			            transform: translateY(-100%);
+			  }
+			}
+			@-webkit-keyframes confetti {
+			  0% {
+			    opacity: 0;
+			    -webkit-transform: translateY(0%) rotate(0deg);
+			            transform: translateY(0%) rotate(0deg);
+			  }
+			  10% {
+			    opacity: 1;
+			  }
+			  35% {
+			    -webkit-transform: translateY(-800%) rotate(270deg);
+			            transform: translateY(-800%) rotate(270deg);
+			  }
+			  80% {
+			    opacity: 1;
+			  }
+			  100% {
+			    opacity: 0;
+			    -webkit-transform: translateY(2000%) rotate(1440deg);
+			            transform: translateY(2000%) rotate(1440deg);
+			  }
+			}
+			@keyframes confetti {
+			  0% {
+			    opacity: 0;
+			    -webkit-transform: translateY(0%) rotate(0deg);
+			            transform: translateY(0%) rotate(0deg);
+			  }
+			  10% {
+			    opacity: 1;
+			  }
+			  35% {
+			    -webkit-transform: translateY(-800%) rotate(270deg);
+			            transform: translateY(-800%) rotate(270deg);
+			  }
+			  80% {
+			    opacity: 1;
+			  }
+			  100% {
+			    opacity: 0;
+			    -webkit-transform: translateY(2000%) rotate(1440deg);
+			            transform: translateY(2000%) rotate(1440deg);
+			  }
+			}
+			@-webkit-keyframes fires {
+			  0% {
+			    -webkit-transform: rotate(-70deg) translateY(0%);
+			            transform: rotate(-70deg) translateY(0%);
+			  }
+			  25% {
+			    -webkit-transform: rotate(-20deg) translateY(-5%);
+			            transform: rotate(-20deg) translateY(-5%);
+			    opacity: 1;
+			  }
+			  50% {
+			    -webkit-transform: rotate(-70deg) translateY(-10%);
+			            transform: rotate(-70deg) translateY(-10%);
+			  }
+			  75% {
+			    -webkit-transform: rotate(-20deg) translateY(-20%);
+			            transform: rotate(-20deg) translateY(-20%);
+			  }
+			  100% {
+			    -webkit-transform: rotate(-70deg) translateY(-40%);
+			            transform: rotate(-70deg) translateY(-40%);
+			    opacity: 1;
+			  }
+			}
+			@keyframes fires {
+			  0% {
+			    -webkit-transform: rotate(-70deg) translateY(0%);
+			            transform: rotate(-70deg) translateY(0%);
+			  }
+			  25% {
+			    -webkit-transform: rotate(-20deg) translateY(-5%);
+			            transform: rotate(-20deg) translateY(-5%);
+			    opacity: 1;
+			  }
+			  50% {
+			    -webkit-transform: rotate(-70deg) translateY(-10%);
+			            transform: rotate(-70deg) translateY(-10%);
+			  }
+			  75% {
+			    -webkit-transform: rotate(-20deg) translateY(-20%);
+			            transform: rotate(-20deg) translateY(-20%);
+			  }
+			  100% {
+			    -webkit-transform: rotate(-70deg) translateY(-40%);
+			            transform: rotate(-70deg) translateY(-40%);
+			    opacity: 1;
+			  }
+			}
+			@-webkit-keyframes sunbeams {
+			  0% {
+			    -webkit-transform: translateY(40%) rotate(0deg);
+			            transform: translateY(40%) rotate(0deg);
+			  }
+			  50% {
+			    -webkit-transform: translateY(-40%) rotate(180deg);
+			            transform: translateY(-40%) rotate(180deg);
+			  }
+			  100% {
+			    -webkit-transform: translateY(40%) rotate(360deg);
+			            transform: translateY(40%) rotate(360deg);
+			  }
+			  0%,14%,17%,43%,53%,71%,80%,94%,100% {
+			    opacity: 0;
+			  }
+			  6%,15%,24%,28%,48%,55%,78%,82%,99% {
+			    opacity: 1;
+			  }
+			}
+			@keyframes sunbeams {
+			  0% {
+			    -webkit-transform: translateY(40%) rotate(0deg);
+			            transform: translateY(40%) rotate(0deg);
+			  }
+			  50% {
+			    -webkit-transform: translateY(-40%) rotate(180deg);
+			            transform: translateY(-40%) rotate(180deg);
+			  }
+			  100% {
+			    -webkit-transform: translateY(40%) rotate(360deg);
+			            transform: translateY(40%) rotate(360deg);
+			  }
+			  0%,14%,17%,43%,53%,71%,80%,94%,100% {
+			    opacity: 0;
+			  }
+			  6%,15%,24%,28%,48%,55%,78%,82%,99% {
+			    opacity: 1;
+			  }
+			}
+
+
+		</style>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/animatext.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tagcanvas.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function () {
+				try {
+					var i, et = document.getElementById('tags').childNodes;
+					for (i in et) {
+						et[i].nodeName == 'A' && et[i].addEventListener('click', function (e) {
+							e.preventDefault();
+						});
+					}
+					TagCanvas.Start('myCanvas', 'tags', {
+						textColour: '#222',
+						outlineColour: '#fff',
+						reverse: true,
+						depth: 0.8,
+						dragControl: true,
+						decel:0.95,
+						maxSpeed: 0.05,
+						initial: [-0.2, 0]
+					});
+				} catch (e) {
+					// something went wrong, hide the canvas container
+					//document.getElementById('myCanvasContainer').style.display = 'none';
+				}
+			};
+
+			$(function(){
+				$(".demo2").animatext({speed: 150,
+					mode: "words",
+					effect: 'swing',
+					infinite: true
+				});
+				//获取可视化窗口的长度
+				var ctn_width = parseInt($('.content').width());
+				//获取整个ul的长度
+				var pages_num = parseInt($('.pages>li').length)*ctn_width;
+				//总共li的数量-1表示最后一个li的索引
+				var lenth_size = parseInt($('.pages>li').length)-1;
+				//初始化设置ul的位置
+				$('.pages').css({'width':pages_num,'left':-ctn_width});
+				//初始化设置li的长度
+				$('.pages>li').css({'width':ctn_width});
+				//初始化显示可视化窗口
+				$('.content').fadeIn(500);
+				//右滑按钮
+				$('.btn_left').on('click',function(){
+					var el_left =  parseInt($('.pages').css('left'));
+					var el_width = parseInt($('.pages>li').width());
+					var index = Math.abs(parseInt($('.pages').css('left')))/ctn_width;
+					if(index <= 0){
+						$('.pages').css({'left':(-(lenth_size-2)*ctn_width)});
+						$(this).click();
+					}else{
+						$('.pages').stop(true,true).animate({'left':(el_left+el_width)},100);
+					}
+				})
+				//左滑按钮
+				$('.btn_right').on('click',function(){
+					var el_left =  parseInt($('.pages').css('left'));
+					var el_width = parseInt($('.pages>li').width());
+					var index = Math.abs(parseInt($('.pages').css('left')))/ctn_width;
+					if(index >= lenth_size-2){
+						$('.pages').css({'left':0});
+						$(this).click();
+					}else{
+						$('.pages').stop(true,true).animate({'left':(el_left-el_width)},100);
+					}
+				})
+				//点击图片显示当页的文字描述
+				$('.el_img').on('click',function(){
+					$(this).parent().find('.els_title').slideToggle(300);
+					$(this).parent().find('.els_font').slideToggle(300);
+					$(this).parent().find('.b_10_3').slideToggle(300);
+				})
+				//监听鼠标滚轮滚动
+				$('body').on('mousewheel',function(e){
+					e = e?e:window.event;
+					//如果值小于0那么向左滑
+					if(event.wheelDelta<0){
+						var el_left =  parseInt($('.pages').css('left'));
+						var el_width = parseInt($('.pages>li').width());
+						var index = Math.abs(parseInt($('.pages').css('left')))/ctn_width;
+						if(index >= lenth_size-2){
+							$('.pages').css({'left':0});
+						}else{
+							$('.pages').stop(false,true).animate({'left':(el_left-el_width)},100);
+						}
+					//如果值大于0向右滑
+					}else{
+						var el_left =  parseInt($('.pages').css('left'));
+						var el_width = parseInt($('.pages>li').width());
+						var index = Math.abs(parseInt($('.pages').css('left')))/ctn_width;
+						if(index <= 0){
+							$('.pages').css({'left':(-(lenth_size-2)*ctn_width)});
+						}else{
+							$('.pages').stop(false,true).animate({'left':(el_left+el_width)},100);
+						}
+					}
+				})
+				//含有特殊标记的元素，被点击时字会变红
+				$('.teshu').on('click',function(){
+					$(this).css('color','red')
+				})
+				//原生的鼠标滚轮监听事件
+//				document.onmousewheel=function(evt){ 
+//					evt=evt?evt:event; 
+//					alert(event.wheelDelta); 
+//				}
+			})
+		</script>
+	</head>
+	<body>
+		<!--可视区域-->
+		<div class="content">
+			<!--总共显示的内容-->
+			<ul class="pages">
+				<li>
+					<div class="el_font">
+						<div class="b_10_3">
+							<canvas width="300" height="300" id="myCanvas"></canvas>
+							<div id="tags">
+								<a href="#">HTML</a>
+								<a href="#">css</a><a href="#">javascript</a><a href="#">bootstrap</a><a href="#">科技</a>
+								<a href="#">vue</a><a href="#">智慧</a><a href="#">jquery</a><a href="#">探索</a><a href="#">互联网</a>
+							</div>
+						</div>
+						<img src="8.jpg" class="el_img"/>
+						<span class="els_font demo2" style="left: 550px;font-size: 50px;top: 315px;">谢谢观看！</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="1.jpg" class="el_img"/>
+						<div class="els_title">前端发展史</div>
+						<span class="els_font">
+							<p>
+								<span style="font-size: 38px;" class="teshu">1994年</span>
+								<span>可以看做前端历史的起点，这一年10月13日网景推出了第一版Navigator；这一年，Tim Berners-Lee创建了W3C；这一年，Tim的基友发布了CSS。还是这一年，为动态web网页设计的服务端脚本PHP诞生。</span>
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">万维网（WWW）</span>
+								<span>是欧洲核子研究组织的一帮科学家为了方便看文档、传论文而创造的，这就是为什么Web网页都基于Document。Document就是用标记语言+超链接写成的由文字和图片构成的HTML页面，这样的功能已经完全满足学术交流的需要，所以网页的早期形态和Document一样，完全基于HTML页面，并且所有内容都是静态的。</span>
+							</p>
+							<p>
+								随着网页从学术机构走向公众社会，网页承载的功能便超出了学术范围而变得愈加丰富，因此早期网页的局限性也逐渐显露出来。
+							</p>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="2.jpg" class="el_img"/>
+						<span class="els_font">
+							<p>
+								 <span style="font-size: 38px;" class="teshu">第一</span>，所有的网页都基于HTML页面，因为没有任何手段可以控制局部内容的显示和隐藏，因此任何局部的变化哪怕只多出一个标点符号，都只能重新下载一个新的页面。
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">第二</span>，计算任务只能在服务端实现。由于网速限制，与服务器通信的过程是非常缓慢的，并且此过程是同步阻塞的，于是会出现这样的场景：用户提交一个表单，然后整个页面消失，浏览器呈现白屏，经过漫长的等待，浏览器渲染出一个和之前一模一样的页面，只不过输入框旁边多了一排红色小字：<span class="teshu">用户名错误</span>。
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">第三</span>，所有页面都是静态的，这意味着一个电商网站有一千种商品，哪怕页面布局一模一样，也必须写一千个单独的页面。
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">总结</span>：早期网页形态低下的效率是无法仅仅通过提高网速解决的。
+							</p>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="3.jpg" class="el_img"/>
+						<span class="els_font">
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									1994年
+								</span>
+								<span>
+									一个叫Rasmus Lerdorf的加拿大人为了维护个人网站而创建了PHP。PHP原意是Personal Home Page，宣传语是Hypertext Preprocessor（超文本处理者）。PHP实现了与数据库的交互以及用于生产动态页面的模板引擎，是Web领域中最主流的服务端语言。
+								</span>
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									1995年
+								</span>
+								<span>
+									网景推出了JavaScript，实现了客户端的计算任务（如表单验证）。
+								</span>
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									1996年
+								</span>
+								<span>
+									微软推出了iframe标签，实现了异步的局部加载。
+								</span>
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									1999年
+								</span>
+								<span>
+									W3C发布第四代HTML标准，同年微软推出用于异步数据传输的ActiveX，随即各大浏览器厂商模仿实现了XMLHttpRequest。这标识着Ajax的诞生，但是Ajax这个词是在六年后问世的，特别是在谷歌使用Ajax技术打造了Gmail和谷歌地图之后，Ajax获得了巨大的关注。Ajax是Web网页迈向Web应用的关键技术，它标识着Web2.0时代的到来。
+								</span>
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									2006年
+								</span>
+								<span>
+									,XMLHttpRequest被W3C正式纳入标准。
+								</span>
+							</p>
+							<p>
+								<span>
+									至此，早期的Document终于进化为了Web page，上述三个局限都得到了妥善的解决。
+								</span>
+							</p>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="4.jpg" class="el_img"/>
+						<span class="els_font">
+							<b style="font-size: 38px;" class="teshu">
+								从后端走向前端
+							</b>
+							<p>
+								  早期的网页开发是由后端主导的，前端能做的也就是操作一下DOM。2006年 John Resig发布了jQuery，jQuery主要用于操作DOM，其优雅的语法、符合直觉的事件驱动型的编程思维使其极易上手，因此很快风靡全球，大量基于jQuery的插件构成了一个庞大的生态系统，更加稳固了jQuery作为JS库一哥的地位。
+							</p>
+							<p>
+								起初制约Web开发从后到前的因素很简单，就是前端很多事干不了或干不好，当时的浏览器性能弱，标准化程度低。特别是占据大量市场份额的IE，不仅ugly，并且buggy。
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									 于2008年
+								</span>
+								<span>
+									问世的谷歌V8引擎改变了这一局面。现代浏览器的崛起终结了微软的垄断时代，前端的计算能力一下子变得过剩了。标准组织也非常配合的在
+								</span>
+								<span style="font-size: 38px;" class="teshu">
+									2009年
+								</span>
+								<span>
+									发布了第五代JavaScript，前端的装备得到了整体性的提高，前端界如同改革开放走进了一个令人目不暇接的新时代。
+								</span>
+							</p>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="5.jpg" class="el_img"/>
+						<span class="els_font">
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									2009年
+								</span>
+								<span>
+									Angular.js诞生，随后被谷歌收购。2010年backbone.js诞生。2011年React和Ember诞生。2014年Vue.js诞生……前后端分离可谓大势所趋。
+								</span>
+							</p>
+							<p>
+								后端只负责数据，前端负责其余工作，这种分工模式一定是更清晰也更高效的。随着基础设置的不断完善以及代码封装层级的不断提高，使得前端一个人能够完成的事越来越多，这是技术积累的必然结果。就好像今天高中生的知识水平，可能远远超过五百年前的科学家，今天要成为Web全栈工程师，门槛也只会越来越低。
+							</p>
+							<b style="font-size: 38px;" class="teshu">
+								从前端走向全端
+							</b>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									 2009年
+								</span>
+								<span>
+									Ryan Dahl发布了node，node是一个基于V8引擎的服务端JavaScript运行环境，类似于一个虚拟机，也就是说js在服务端语言中有了一席之地。如果说ajax是前端的第一次飞跃，那么node可算作前端的第二次飞跃。它意味着JavaScript走出了浏览器的藩篱，迈出了全端化的第一步。
+								</span>
+							</p>
+							<p>
+								一种流行的组合就是利用Express和Mongo搭建服务端程序。
+							</p>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="6.jpg" class="el_img"/>
+						<span class="els_font">
+							<p>
+								<span class="teshu particletext confetti">Web开疆拓土的步伐并不止于此。</span>
+							</p>
+							<p>
+								<span style="font-size: 38px;" class="teshu">
+									  2007年
+								</span>
+								<span>
+									第一代iphone发布，2008年第一台安卓手机发布。悄然间互联网进入了移动时代。移动端的发展进程和PC的历史如出一辙，一开始都是Native App的天下。但浏览器试图取代操作系统的篡位之心从未消减。相比原生应用，Web APP有太多好处：无须开发两套系统版本、无须安装、无须手动升级、无须审核……我认为最大的好处以及驱动软件形态转向的主要原因在于降低成本，记得13年的时候韩寒说做一个APP大概需要五十万，今天网上比较靠谱的分析评估半年时间从零做出一个稍微像样的APP至少100万，而开发Web App花的钱一定少得多。
+								</span>
+							</p>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="7.jpg" class="el_img"/>
+						<span class="els_font">
+							<p>
+								<span>
+									 制约Web App的因素有很多，但我们可以看到Web App一直在不断修复缺陷、突破局限。你说网页有tab bar，好吧，给你个fullpage API，你说网页不能调取系统功能，好吧，Geolocation API、Vibration API、Luminosity API、Orientation API、Camera API……
+								</span>
+							</p>
+							<p>
+								<span>
+									你说网页不像APP有图标，IOS早就支持在桌面上添加网页链接的快捷图标，还得是乔帮主远见；你说网页必须联网，现在离线的方案也很多啊；你说Web App性能差，这个……你说得对，也就是这个原因，Native App还能作为主流存在一段时间，可是如果Web App的性能逐渐赶上Native了呢？目前的Hybrid、nw.js、Electron等都可以看做Web App在性能方面向Native靠近的尝试。更何况半路又杀出个微信小程序。  
+								</span>
+							</p>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="8.jpg" class="el_img"/>
+						<span class="els_font demo2" style="left: 550px;font-size: 50px;top: 315px;">谢谢观看！</span>
+					</div>
+				</li>
+				<!--<li>
+					<div class="el_font">
+						<img src="10.jpg" class="el_img"/>
+						<span class="els_font">测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字</span>
+					</div>
+				</li>
+				<li>
+					<div class="el_font">
+						<img src="9.jpg" class="el_img"/>
+						<span class="els_font">测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字</span>
+					</div>
+				</li>-->
+				<li>
+					<div class="el_font">
+						<img src="1.jpg" class="el_img"/>
+						<div class="els_title">前端发展史</div>
+						<span class="els_font">
+							<p>
+								<span style="font-size: 38px;">1994年</span>
+								<span>可以看做前端历史的起点，这一年10月13日网景推出了第一版Navigator；这一年，Tim Berners-Lee创建了W3C；这一年，Tim的基友发布了CSS。还是这一年，为动态web网页设计的服务端脚本PHP诞生。</span></span>
+							</p>
+							<p>
+								<span style="font-size: 38px;">万维网（WWW）</span>
+								<span>是欧洲核子研究组织的一帮科学家为了方便看文档、传论文而创造的，这就是为什么Web网页都基于Document。Document就是用标记语言+超链接写成的由文字和图片构成的HTML页面，这样的功能已经完全满足学术交流的需要，所以网页的早期形态和Document一样，完全基于HTML页面，并且所有内容都是静态的。</span>
+							</p>
+							<p>
+								随着网页从学术机构走向公众社会，网页承载的功能便超出了学术范围而变得愈加丰富，因此早期网页的局限性也逐渐显露出来。
+							</p>
+					</div>
+				</li>
+			</ul>
+			<!--右滑点击按键-->
+			<div class="btn_left btns"><</div>
+			<!--左滑点击按键-->
+			<div class="btn_right btns">></div>
+		</div>
+		<script type="text/javascript">
+			//okpt("CSS Particle Effects");
+				function initparticles() {
+				   bubbles();
+				   hearts();
+				   lines();
+				   confetti();
+				   fire();
+				   sunbeams();
+				}
+				
+				/*The measurements are ... whack (so to say), for more general text usage I would generate different sized particles for the size of text; consider this pen a POC*/
+				
+				function bubbles() {
+				   $.each($(".particletext.bubbles"), function(){
+				      var bubblecount = ($(this).width()/50)*10;
+				      for(var i = 0; i <= 40; i++) {
+				         var size = ($.rnd(40,80)/10);
+				         $(this).append('<span class="particle" style="top:' + $.rnd(20,80) + '%; left:' + $.rnd(0,95) + '%;width:' + size + 'px; height:' + size + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
+				      }
+				   });
+				}
+				
+				function hearts() {
+				   $.each($(".particletext.hearts"), function(){
+				      var heartcount = ($(this).width()/50)*5;
+				      for(var i = 0; i <= 40; i++) {
+				         var size = ($.rnd(60,120)/10);
+				         $(this).append('<span class="particle" style="top:' + $.rnd(20,80) + '%; left:' + $.rnd(0,95) + '%;width:' + size + 'px; height:' + size + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
+				      }
+				   });
+				}
+				
+				function lines() {
+				   $.each($(".particletext.lines"), function(){
+				      var linecount = ($(this).width()/50)*10;
+				      for(var i = 0; i <= 40; i++) {
+				         $(this).append('<span class="particle" style="top:' + $.rnd(-30,30) + '%; left:' + $.rnd(-10,110) + '%;width:' + $.rnd(1,3) + 'px; height:' + $.rnd(20,80) + '%;animation-delay: -' + ($.rnd(0,30)/10) + 's;"></span>');
+				      }
+				   });
+				}
+				
+				function confetti() {
+				   $.each($(".particletext.confetti"), function(){
+				      var confetticount = ($(this).width()/50)*10;
+				      for(var i = 0; i <= 40; i++) {
+				         $(this).append('<span class="particle c' + $.rnd(1,2) + '" style="top:' + $.rnd(10,50) + '%; left:' + $.rnd(0,100) + '%;width:' + $.rnd(6,8) + 'px; height:' + $.rnd(3,4) + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
+				      }
+				   });
+				}
+				
+				function fire() {
+				   $.each($(".particletext.fire"), function(){
+				      var firecount = ($(this).width()/50)*20;
+				      for(var i = 0; i <= 40; i++) {
+				         var size = $.rnd(8,12);
+				         $(this).append('<span class="particle" style="top:' + $.rnd(40,70) + '%; left:' + $.rnd(-10,100) + '%;width:' + size + 'px; height:' + size + 'px;animation-delay: ' + ($.rnd(0,20)/10) + 's;"></span>');
+				      }
+				   });
+				}
+				
+				function sunbeams() {
+				   $.each($(".particletext.sunbeams"), function(){
+				      var linecount = ($(this).width()/50)*10;
+				      for(var i = 0; i <= linecount; i++) {
+				         $(this).append('<span class="particle" style="top:' + $.rnd(-50,00) + '%; left:' + $.rnd(0,100) + '%;width:' + $.rnd(1,3) + 'px; height:' + $.rnd(80,160) + '%;animation-delay: -' + ($.rnd(0,30)/10) + 's;"></span>');
+				      }
+				   });
+				}
+				
+				jQuery.rnd = function(m,n) {
+				      m = parseInt(m);
+				      n = parseInt(n);
+				      return Math.floor( Math.random() * (n - m + 1) ) + m;
+				}
+				
+				initparticles();
+		</script>
+		
+		
+		
+
+
+<!--<tr>
+	<td width="184" background="/skins/Valentine/images/banner1.gif"></td>
+	<td background="/skins/Valentine/images/banner.gif">
+		<div class="header">
+			<div class="headerText">
+				<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/yzyh/">佑之以航</a><br>
+				<span style="font-size:12px;color:#4371A6;padding-left:20;"></span>
+			</div>
+		</div>
+	</td>
+		<td width="295" background="/skins/Valentine/images/banner2.gif"></td>
+	</tr>-->
+
+<!--<script type="text/javascript">
+	$('table:eq(0)>tbody>tr').html('')
+var html2 = '';
+html2 += '<td width="184" background="http://images.cnblogs.com/cnblogs_com/yzyh/1100107/o_21.jpg"></td>';
+html2 += '<td background="http://images.cnblogs.com/cnblogs_com/yzyh/1100107/o_23.jpg">';
+html2 += '<div class="header">';
+html2 += '<div class="headerText">';
+html2 += '<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/yzyh/">佑之以航</a><br>';
+html2 += '<span style="font-size:12px;color:#4371A6;padding-left:20;"></span>';
+html2 += '</div></div>';
+html2 += '</td>';
+html2 += '<td width="184" background="http://images.cnblogs.com/cnblogs_com/yzyh/1100107/o_22.jpg"></td>';
+$('table:eq(0)>tbody>tr').html(html2)
+</script>-->
+
+	</body>
+</html>
